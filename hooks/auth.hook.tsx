@@ -13,7 +13,7 @@ type AuthActions = {
     refreshToken: string,
     expiresAt: number,
   ) => void;
-  unauthenticate: () => void;
+  unauthenticate: () => Promise<void>;
   refresh: () => Promise<void>;
 };
 
@@ -25,12 +25,23 @@ export const useAuth = create(
       expiresAt: undefined,
       authenticate: (token, refreshToken, expiresAt) =>
         set({ token, refreshToken, expiresAt }),
-      unauthenticate: () =>
+      unauthenticate: async () => {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/tokens/revoke`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            refreshToken: get().refreshToken,
+          }),
+        });
+
         set({
           token: undefined,
           refreshToken: undefined,
           expiresAt: undefined,
-        }),
+        });
+      },
       refresh: async () => {
         try {
           const response = await fetch(
