@@ -32,7 +32,7 @@ export const useAuth = create(
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            refreshToken: get().refreshToken,
+            token: get().refreshToken,
           }),
         });
 
@@ -52,7 +52,7 @@ export const useAuth = create(
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                refreshToken: get().refreshToken,
+                token: get().refreshToken,
               }),
             },
           );

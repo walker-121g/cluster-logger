@@ -1,5 +1,3 @@
-"use server";
-
 import * as Schema from "@/schema";
 import { drizzle } from "drizzle-orm/node-postgres";
 
