@@ -14,6 +14,7 @@ export type Context = {
   lastName: string;
   email: string;
   phone: string;
+  type: "USER" | "DEVELOPER" | "ADMIN" | "SUPPORT";
   isEmailVerified: boolean;
   isPhoneVerified: boolean;
   isActive: boolean;
@@ -28,7 +29,7 @@ export type Context = {
     isPrivate: boolean;
     createdAt: string;
     updatedAt: string;
-  };
+  } | null;
 };
 
 export class AuthBridge {

@@ -24,8 +24,7 @@ export const getContext = async () => {
     .select()
     .from(users)
     .where(eq(users.email, decoded.email))
-    .limit(1)
-    .execute();
+    .limit(1);
 
   return result.length > 0 ? result[0] : null;
 };
